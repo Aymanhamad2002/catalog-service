@@ -9,7 +9,6 @@ jobs:
 
     permissions:
       contents: read
-      actions: read
       security-events: write
 
     steps:
@@ -25,19 +24,12 @@ jobs:
 
       - name: Code Vulnerability Scan
         uses: anchore/scan-action@v7
-        id: scan
         with:
           path: "${{ github.workspace }}"
           fail-build: false
           severity-cutoff: high
 
-      - name: Upload Scan Report
-        uses: github/codeql-action/upload-sarif@v4
-        if: always()
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
-
       - name: Build, Unit Tests and Integration Tests
         run: |
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew clean build
