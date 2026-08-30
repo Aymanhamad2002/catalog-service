@@ -6,3 +6,29 @@ server:
         threads:
             max: 50
             min-spare: 5
+
+spring:
+    application:
+        name: catalog-service
+    config:
+        import: "optional:configserver:"
+    cloud:
+        config:
+            uri: http://localhost:8888
+            request-connect-timeout: 5000
+            request-read-timeout: 5000
+            fail-fast: true
+            retry:
+                max-attempts: 5
+                initial-interval: 1000
+                multiplier: 1.5
+                max-interval: 5000
+management:
+    endpoints:
+        web:
+            exposure:
+                include: refresh
+    
+
+polar:
+    greeting: "Welcome to Polar !"

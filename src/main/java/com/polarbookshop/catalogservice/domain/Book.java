@@ -19,4 +19,9 @@ public record Book(
     @NotNull(message = "Price must not be null")
     @Positive(message = "Price must be a positive value")
     Double price) {
+        //create constructor with publisher parameter
+        public Book(String isbn, String title, String author, Double price, String publisher) {
+            this(isbn, title, author, price);
+        }
+
 }
