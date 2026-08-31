@@ -25,14 +25,14 @@ public class BookValidationTests {
 
     @Test
     void WhenAllFieldsCorrectThenValidationSucceeds() {
-        var book = new Book("1234567890", "Title", "Author", 9.99);
+        var book = Book.of("   1234567890", "Title", "Author", 9.99, "Sceptre");
         var violations = validator.validate(book);
         assert(violations.isEmpty());
     }
 
     @Test
     void whenIsbnDefineButIncorrectThenValidationFails() {
-        var book = new Book("123", "Title", "Author", 9.99);
+        var book = Book.of("123", "Title", "Author", 9.99, "Sceptre");
         var violations = validator.validate(book);
         assert(!violations.isEmpty());
     }

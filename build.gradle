@@ -1,4 +1,3 @@
-
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.1.1'
@@ -28,10 +27,23 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.retry:spring-retry'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	runtimeOnly 'org.postgresql:postgresql'
+	testRuntimeOnly 'com.h2database:h2'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jdbc-test'
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'org.flywaydb:flyway-database-postgresql'
+	implementation 'org.springframework.boot:spring-boot-flyway'
+	
 }
+		
 dependencyManagement {
 	imports {
 		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2025.1.2'
+		mavenBom 'org.testcontainers:testcontainers-bom:1.20.6'
+
+		
 	}
 }
 

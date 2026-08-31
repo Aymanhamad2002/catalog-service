@@ -16,7 +16,7 @@ class CatalogServiceApplicationTests {
 	private WebTestClient webTestClient;
 	
 	void whenPostRequestThenBookIsCreated() {
-		var book = new Book("1234567890", "Title", "Author", 9.99);
+		var book = Book.of("1234567890", "Title", "Author", 9.99, "Sceptre");
 		webTestClient.post().uri("/books")
 			.bodyValue(book)
 			.exchange()
