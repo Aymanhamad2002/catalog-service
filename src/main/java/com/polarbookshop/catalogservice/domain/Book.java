@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.Instant;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -21,13 +22,19 @@ public record Book(
     Long id,
 
     @Version
-    int version,
+    Integer version,
 
     @CreatedDate
     Instant createdDate,
 
     @LastModifiedDate
     Instant lastModifiedDate,
+
+    @CreatedBy 
+    String createdBy,
+
+    @LastModifiedBy 
+    String lastModifiedBy,
 
     @NotBlank(message = "ISBN must not be blank")
     @Pattern(regexp = "^(97(8|9))?\\d{9}(\\d|X)$", message = "ISBN must be a valid format")
@@ -48,7 +55,7 @@ public record Book(
 ) {
         //create constructor with publisher parameter
         public static Book of(String isbn, String title, String author, Double price, String publisher) {
-            return new Book(null, 0,null,null  , isbn, title, author, price, publisher);
+            return new Book(null, null, null, null,null,null, isbn, title, author, price, publisher);
         }
 
 }

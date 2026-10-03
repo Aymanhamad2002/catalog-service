@@ -55,6 +55,8 @@ public class BookJsonTests {
                 "version": 0,
                 "createdDate": null,
                 "lastModifiedDate": null,
+                e"createdBy": null,
+                "lastModifiedBy": null,
                 "isbn": "1234567890",
                 "title": "Title",
                 "author": "Author",
