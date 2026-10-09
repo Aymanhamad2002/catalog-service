@@ -52,10 +52,10 @@ public class BookJsonTests {
         var content = """
             {
                 "id": null,
-                "version": 0,
+                "version": null,
                 "createdDate": null,
                 "lastModifiedDate": null,
-                e"createdBy": null,
+                "createdBy": null,
                 "lastModifiedBy": null,
                 "isbn": "1234567890",
                 "title": "Title",

@@ -1,6 +1,8 @@
 package com.polarbookshop.catalogservice.service;
 
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.polarbookshop.catalogservice.repository.BookRepository;
 
@@ -14,6 +16,7 @@ import com.polarbookshop.catalogservice.exception.BookNotFoundException;
 
 @Service
 public class BookService {
+    private static final Logger log = LoggerFactory.getLogger(BookService.class);
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
@@ -30,13 +33,16 @@ public class BookService {
         if(bookRepository.existsByIsbn(book.isbn())) {
             throw new BookAlreadyExistsException(book.isbn());
         }
-        return bookRepository.save(book);
+        var savedBook = bookRepository.save(book);
+        log.info("Added book with ISBN {} to the catalog", savedBook.isbn());
+        return savedBook;
     }
     public void removeBookFromCatalog(String isbn) {
         if(!bookRepository.existsByIsbn(isbn)) {
             throw new BookNotFoundException(isbn);
         }
         bookRepository.deleteByIsbn(isbn);
+        log.info("Removed book with ISBN {} from the catalog", isbn);
     }
     public Book editBookDetails(String isbn, Book book) {
 
@@ -44,7 +50,9 @@ public class BookService {
                 .map(existingBook -> {
                     var bookToUpdate = new Book(book.id(),book.version(),book.createdDate(),book.lastModifiedDate(),existingBook.createdBy(), existingBook.lastModifiedBy(), book.isbn(), book.title(), book.author(), book.price(), book.publisher());
                   
-                    return bookRepository.save(bookToUpdate);
+                    var savedBook = bookRepository.save(bookToUpdate);
+                    log.info("Updated book with ISBN {} in the catalog", savedBook.isbn());
+                    return savedBook;
                 })
                 .orElseGet(() -> addBookToCatalog(book));
     }

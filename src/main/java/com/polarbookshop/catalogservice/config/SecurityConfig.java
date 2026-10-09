@@ -22,6 +22,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.GET,"/","/books/**").permitAll()
+                .requestMatchers("/actuator/**").permitAll()
                 .anyRequest().hasRole("employee"))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement( sessionManagement ->

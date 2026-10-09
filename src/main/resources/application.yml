@@ -20,9 +20,10 @@ spring:
     lifecycle:
         timeout-per-shutdown-phase: 15s
     config:
-        import: "optional:configserver:"
+        import: ""
     cloud:
         config:
+            enabled: false
             uri: http://localhost:8888
             request-connect-timeout: 5000
             request-read-timeout: 5000
@@ -46,7 +47,20 @@ management:
     endpoints:
         web:
             exposure:
-                include: refresh
+                include: refresh,health,prometheus
+    endpoint:
+        health:
+            show-details: always
+            show-components: always
+            probes:
+                enabled: true
+    metrics:
+        tags:
+            application: ${spring.application.name}
+
+logging:
+    pattern:
+        level: "%5p [${spring.application.name:},%X{traceId},%X{spanId}]"
 
 
 polar:
