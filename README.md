@@ -31,8 +31,6 @@ The service listens on `http://localhost:9001`. The Gradle `bootRun` task enable
 | `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` | Local demo database credentials |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | `http://localhost:8080/realms/PolarBookshop` |
 
-Spring Cloud Config is disabled in the checked-in application configuration. Merely changing its server URI does not enable it.
-
 ## Related repositories
 
 | Repository | Responsibility |
@@ -41,9 +39,6 @@ Spring Cloud Config is disabled in the checked-in application configuration. Mer
 | [catalog-service](https://github.com/Aymanhamad2002/catalog-service) | Book catalog and PostgreSQL persistence |
 | [order-service](https://github.com/Aymanhamad2002/order-service) | Orders and asynchronous dispatch tracking |
 | [dispatcher-service](https://github.com/Aymanhamad2002/dispatcher-service) | Event-driven packing and labeling |
-| [polar-deployment](https://github.com/Aymanhamad2002/polar-deployment) | Docker Compose, Kubernetes, and observability configuration |
-| [config-service](https://github.com/Aymanhamad2002/config-service) | Spring Cloud Config server |
-| [config-repo](https://github.com/Aymanhamad2002/config-repo) | Shared application configuration |
 
 ## Build and test
 
